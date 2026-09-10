@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedro Barros — Análise de Dados & BI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #121820;
+    --panel: #1a222c;
+    --rule: #2a3441;
+    --text: #eceae4;
+    --muted: #8b96a3;
+    --accent: #e8a33d;
+    --accent-dim: #6b5433;
+    --maxw: 760px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---- Hero ---- */
+
+  header.hero{
+    padding: 100px 0 70px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .hero-inner{
+    display: flex;
+    gap: 40px;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .hero-text{ flex: 1; }
+
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    margin: 0 0 18px;
+  }
+
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.08;
+    margin: 0 0 20px;
+    max-width: 11ch;
+  }
+
+  .hero-text p{
+    color: var(--muted);
+    max-width: 46ch;
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  .signal{
+    flex-shrink: 0;
+    width: 150px;
+    height: 110px;
+    opacity: 0;
+    transform: translateY(6px);
+    animation: rise 0.9s cubic-bezier(.2,.7,.3,1) 0.15s forwards;
+  }
+
+  @keyframes rise{
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  .signal .bar{
+    transform-origin: bottom;
+    animation: grow 0.7s cubic-bezier(.2,.7,.3,1) both;
+  }
+  .signal .bar:nth-child(1){ animation-delay: .25s; }
+  .signal .bar:nth-child(2){ animation-delay: .35s; }
+  .signal .bar:nth-child(3){ animation-delay: .45s; }
+  .signal .bar:nth-child(4){ animation-delay: .55s; }
+  .signal .bar:nth-child(5){ animation-delay: .65s; }
+
+  @keyframes grow{
+    from{ transform: scaleY(0); }
+    to{ transform: scaleY(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .signal, .signal .bar{ animation: none !important; opacity:1; transform:none; }
+  }
+
+  /* ---- Sections ---- */
+
+  section{
+    padding: 56px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  section:last-of-type{ border-bottom: none; }
+
+  h2{
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--muted);
+    text-transform: none;
+    letter-spacing: 0.01em;
+    margin: 0 0 32px;
+  }
+
+  /* ---- About ---- */
+
+  .about p{
+    max-width: 58ch;
+    font-size: 1.02rem;
+    color: var(--text);
+    margin: 0 0 14px;
+  }
+
+  /* ---- Projects ---- */
+
+  .project{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 24px;
+    padding: 26px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .project:first-of-type{ border-top: none; }
+
+  .project-title{
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .project-desc{
+    grid-column: 1 / -1;
+    color: var(--muted);
+    max-width: 56ch;
+    margin: 6px 0 12px;
+    font-size: 0.98rem;
+  }
+
+  .project-tags{
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  .project-tags span{
+    border: 1px solid var(--accent-dim);
+    padding: 3px 9px;
+    border-radius: 3px;
+  }
+
+  .project-link{
+    align-self: start;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--text);
+    border-bottom: 1px solid var(--muted);
+    white-space: nowrap;
+    padding-bottom: 1px;
+    transition: border-color .15s ease, color .15s ease;
+  }
+
+  .project-link:hover{
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .project.placeholder .project-title{ color: var(--muted); }
+  .project.placeholder{ opacity: 0.6; }
+
+  /* ---- Contact ---- */
+
+  .contact-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-list a{
+    text-decoration: none;
+    font-size: 1.05rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color .15s ease, color .15s ease;
+  }
+
+  .contact-list a:hover{
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  footer{
+    padding: 36px 0 60px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+  }
+
+  @media (max-width: 600px){
+    .hero-inner{ flex-direction: column-reverse; align-items: flex-start; gap: 28px; }
+    header.hero{ padding: 64px 0 48px; }
+    .signal{ width: 120px; height: 88px; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">análise de dados · business intelligence · logística</p>
+        <h1>Pedro Barros</h1>
+        <p>Técnico em Logística e estudante de ADS transformando dados operacionais em dashboards e decisões de negócio.</p>
+      </div>
+      <svg class="signal" viewBox="0 0 150 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="0" y1="105" x2="150" y2="105" stroke="#2a3441" stroke-width="1"/>
+        <rect class="bar" x="0"   y="55" width="18" height="50" fill="#8b96a3"/>
+        <rect class="bar" x="33"  y="30" width="18" height="75" fill="#8b96a3"/>
+        <rect class="bar" x="66"  y="70" width="18" height="35" fill="#8b96a3"/>
+        <rect class="bar" x="99"  y="15" width="18" height="90" fill="#e8a33d"/>
+        <rect class="bar" x="132" y="45" width="18" height="60" fill="#8b96a3"/>
+      </svg>
+    </div>
+  </header>
+
+  <section class="about">
+    <div class="wrap">
+      <h2>sobre</h2>
+      <p>Sou estudante de Análise e Desenvolvimento de Sistemas, atualmente me especializando em desenvolvimento full stack, e técnico em Logística. Hoje atuo na DHL, uma das maiores empresas de logística do mundo, referência em contratos de Supply Chain e transporte expresso internacional.</p>
+      <p>É de dentro da operação logística que nasceu meu interesse por dados: lido diariamente com volumes grandes de informação sobre transporte, prazos e processos, e quero aplicar isso na prática — transformando dados operacionais em dashboards e análises que ajudem a tomar decisões melhores.</p>
+    </div>
+  </section>
+
+  <section class="projects">
+    <div class="wrap">
+      <h2>projetos</h2>
+
+      <div class="project">
+        <p class="project-title">Análise de Vendas — E-commerce Olist</p>
+        <a class="project-link" href="#" target="_blank" rel="noopener">ver dashboard →</a>
+        <p class="project-desc">Dashboard de KPIs de vendas (receita, ticket médio, taxa de atraso de entrega) a partir do dataset público da Olist, com filtros por estado, categoria e período.</p>
+        <div class="project-tags">
+          <span>power bi</span>
+          <span>dax</span>
+          <span>modelagem de dados</span>
+        </div>
+      </div>
+
+      <div class="project placeholder">
+        <p class="project-title">Próximo projeto</p>
+        <a class="project-link" href="#" target="_blank" rel="noopener">em breve</a>
+        <p class="project-desc">Espaço reservado para o seu segundo projeto — SQL, Python ou uma extensão do dashboard acima.</p>
+        <div class="project-tags">
+          <span>sql</span>
+          <span>python</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="wrap">
+      <h2>contato</h2>
+      <ul class="contact-list">
+        <li><a href="mailto:p.barrosgom@gmail.com">p.barrosgom@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/pedro-barros-bab756213/" target="_blank" rel="noopener">linkedin.com/in/pedro-barros</a></li>
+        <li><a href="https://github.com/pbarrosgom" target="_blank" rel="noopener">github.com/pbarrosgom</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      atualizado em 2026
+    </div>
+  </footer>
+
+</body>
+</html>
